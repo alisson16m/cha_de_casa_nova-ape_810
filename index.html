@@ -216,6 +216,9 @@
   footer .f-event{font-family:var(--display);font-size:24px;line-height:1.1;color:var(--cafe)}
   footer .f-names{font-family:var(--script);font-size:30px;line-height:1.2;color:var(--caramelo);margin-top:4px}
   footer .f-info{font-size:12.5px;line-height:1.6;margin-top:10px}
+  /* botões e Pix fecham o convite, depois do estilo da casa */
+  .access-end{padding-top:40px;margin-top:40px}
+  .sec-pix{padding-top:28px}
 </style>
 </head>
 <body>
@@ -355,15 +358,6 @@
     <a class="btn-light" target="_blank" rel="noopener" href="https://maps.app.goo.gl/qQZNyK8ymZh7teRr5">Abrir no Google Maps</a>
   </section>
 
-  <section class="access">
-    <div class="panel">
-      <h3>Acesse as informações abaixo</h3>
-      <div class="tiles">
-        <a class="tile" href="#confirmar" id="open-rsvp" aria-controls="confirmar" aria-haspopup="dialog"><i><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></i>Confirmar presença</a>
-        <a class="tile" href="lista-de-presentes.html"><i><svg viewBox="0 0 24 24"><rect x="3.5" y="9" width="17" height="11" rx="1.5"/><path d="M2.5 9h19M12 9v11M12 9c-2-4-7-4-6-1s6 1 6 1zm0 0c2-4 7-4 6-1s-6 1-6 1z"/></svg></i>Lista de presentes</a>
-      </div>
-    </div>
-  </section>
 
   <!-- ================= CONFIRMAR ================= -->
   <dialog class="sec rsvp-pop" id="confirmar" aria-labelledby="rsvp-title">
@@ -424,7 +418,21 @@
     </div>
     <p class="swipe" aria-hidden="true">toque na foto para ampliar</p>
 
-    <a class="primary" style="margin-top:18px" href="lista-de-presentes.html">Ver lista de presentes</a>
+  </section>
+
+  <!-- ================= CONFIRMAR PRESENÇA E LISTA DE PRESENTES ================= -->
+  <section class="access access-end">
+    <div class="panel">
+      <h3>Acesse as informações abaixo</h3>
+      <div class="tiles">
+        <a class="tile" href="#confirmar" id="open-rsvp" aria-controls="confirmar" aria-haspopup="dialog"><i><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></i>Confirmar presença</a>
+        <a class="tile" href="lista-de-presentes.html"><i><svg viewBox="0 0 24 24"><rect x="3.5" y="9" width="17" height="11" rx="1.5"/><path d="M2.5 9h19M12 9v11M12 9c-2-4-7-4-6-1s6 1 6 1zm0 0c2-4 7-4 6-1s-6 1-6 1z"/></svg></i>Lista de presentes</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= PIX ================= -->
+  <section class="sec sec-pix">
     <div class="pix">
       <b>Não vai poder estar com a gente?</b>
       <p>Seu presente pode chegar até nós pelo condomínio ou, se preferir, em forma de Pix:</p>
