@@ -1,0 +1,475 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lista de Presentes do Apê 810</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Caveat:wght@500;700&family=Great+Vibes&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    /* mesma paleta do convite */
+    --mel:#BFB5AA; --caramelo:#8C5350; --cafe:#402C29; --nevoa:#FCF9F7; --rosado:#F2E8E3;
+    --white:#FFFFFF; --ink:#3A2826; --muted:#76605C; --line:#E3D4CE; --cream:#FAF4F1;
+    --display:"Instrument Serif",Georgia,serif; --hand:"Caveat",cursive; --script:"Great Vibes",cursive; --sans:"Instrument Sans",system-ui,sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  [hidden]{display:none!important}
+  html{scroll-behavior:smooth;scroll-padding-top:70px}
+  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+  body{font-variant-numeric:lining-nums;background:var(--rosado);color:var(--ink);font-family:var(--sans);font-size:16px;-webkit-font-smoothing:antialiased}
+  main{max-width:460px;margin:0 auto;background:var(--nevoa);min-height:100vh;position:relative}
+  a:focus-visible,button:focus-visible{outline:2px solid var(--caramelo);outline-offset:3px}
+  .doodle{fill:none;stroke:var(--caramelo);stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+
+  /* ===== topo ===== */
+  .top{padding:20px 20px 0}
+  .back{display:inline-flex;align-items:center;gap:6px;color:var(--cafe);text-decoration:none;font-size:14.5px;font-weight:500;padding:8px 14px 8px 10px;border-radius:999px;background:var(--white);border:1px solid var(--line)}
+  .back svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+  .hero{text-align:center;padding:34px 24px 26px}
+  .hero .gift{width:74px;height:auto;display:block;margin:0 auto 10px}
+  .hero h1{font-family:var(--display);font-weight:400;color:var(--cafe);font-size:clamp(50px,15vw,66px);line-height:.92;letter-spacing:-.02em}
+  .hero .names{font-family:var(--script);font-size:32px;color:var(--caramelo);margin-top:8px;line-height:1.1}
+  .hero p{color:var(--muted);font-size:15px;line-height:1.6;max-width:34ch;margin:14px auto 0}
+  /* aviso que some sozinho quando todos os itens tiverem link */
+  .hero p.pending{display:inline-block;margin-top:14px;padding:6px 14px;border-radius:999px;background:var(--cream);border:1px dashed var(--line);font-size:13.5px;line-height:1.4;color:var(--muted)}
+  .hero p.pending[hidden]{display:none}
+
+  /* ===== navegação por cômodo ===== */
+  .rooms-nav{position:sticky;top:0;z-index:5;background:rgba(252,249,247,.94);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);border-bottom:1px solid var(--line)}
+  .rooms-nav ul{list-style:none;display:flex;gap:8px;overflow-x:auto;padding:12px 20px;scrollbar-width:none}
+  .rooms-nav ul::-webkit-scrollbar{display:none}
+  .rooms-nav a{display:block;white-space:nowrap;text-decoration:none;font-size:14px;font-weight:500;color:var(--cafe);padding:8px 14px;border-radius:999px;border:1px solid var(--line);background:var(--white)}
+  .rooms-nav a[aria-current=true]{background:var(--cafe);border-color:var(--cafe);color:#fff}
+
+  /* ===== cômodos ===== */
+  .room{padding:34px 20px 6px}
+  .room-head{display:flex;align-items:flex-end;gap:12px;padding:0 4px 12px;border-bottom:1.5px solid var(--cafe)}
+  .room-head svg{width:44px;height:44px;flex:none}
+  .room-head h2{font-family:var(--display);font-weight:400;font-size:clamp(28px,8.2vw,36px);line-height:1;color:var(--cafe)}
+  .room-head .count{margin-left:auto;font-family:var(--hand);font-size:20px;color:var(--muted);white-space:nowrap;line-height:1.2}
+
+  .items{list-style:none}
+  .item{display:flex;align-items:center;gap:14px;padding:12px 4px;border-bottom:1px dashed var(--line)}
+  .thumb{flex:none;width:72px;height:72px;border-radius:12px;overflow:hidden;background:var(--white);border:1px solid var(--line);display:grid;place-items:center}
+  .thumb img{display:block;width:100%;height:100%;object-fit:contain}
+  /* sem foto ainda: o desenho do cômodo, bem apagado */
+  .thumb.empty{background:var(--cream);border-style:dashed}
+  .thumb.empty svg{width:34px;height:34px;opacity:.35}
+  .info{flex:1;min-width:0;display:grid;gap:7px;justify-items:start}
+  .item .name{font-size:15.5px;line-height:1.35;color:var(--ink)}
+  .item .name::first-letter{text-transform:uppercase}
+  .links{display:flex;flex-wrap:wrap;gap:6px}
+  .shop{display:inline-flex;align-items:center;gap:6px;padding:8px 13px;border-radius:999px;background:var(--caramelo);color:#fff;text-decoration:none;font-size:13.5px;font-weight:500;line-height:1;white-space:nowrap}
+  .shop svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+  .shop:active{transform:scale(.97)}
+  .soon{font-family:var(--hand);font-size:19px;line-height:1;color:var(--muted);opacity:.8;white-space:nowrap}
+
+  /* ===== "vou dar este presente" ===== */
+  .actions{display:flex;flex-wrap:wrap;align-items:center;gap:6px 8px}
+  .claim{font:inherit;display:inline-flex;align-items:center;gap:6px;padding:7px 12px;border-radius:999px;border:1.5px solid var(--caramelo);background:var(--white);color:var(--caramelo);font-size:13.5px;font-weight:500;line-height:1;cursor:pointer;white-space:nowrap}
+  .claim svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+  .claim:active{transform:scale(.97)}
+  .claim[disabled]{opacity:.5;cursor:progress}
+  .status{font-family:var(--hand);font-size:20px;line-height:1.1;color:var(--caramelo)}
+  .undo{font:inherit;font-size:13px;font-weight:500;color:var(--muted);background:none;border:0;padding:4px 2px;text-decoration:underline;text-underline-offset:3px;cursor:pointer}
+  /* escolhido por outra pessoa: fica na lista, mas apagado e sem botões */
+  .item.taken .thumb{opacity:.4;filter:grayscale(.6)}
+  .item.taken .name{color:var(--muted);text-decoration:line-through;text-decoration-color:var(--mel)}
+  .item.taken .links,.item.taken .soon,.item.taken .claim,.item.mine .claim{display:none}
+  .item.mine .thumb{box-shadow:0 0 0 2px var(--caramelo)}
+  .hero p.claim-hint{font-size:14px;margin-top:10px}
+  .hero p.claim-hint[hidden]{display:none}
+
+  dialog.claim-pop{position:fixed;inset:0;margin:auto;height:fit-content;width:min(400px,92vw);border:0;border-radius:22px;padding:28px 22px 22px;background:var(--nevoa);color:var(--ink);box-shadow:0 24px 48px -20px rgba(64,44,41,.6)}
+  dialog.claim-pop::backdrop{background:rgba(64,44,41,.55)}
+  .claim-pop h2{font-family:var(--display);font-weight:400;font-size:30px;line-height:1.1;color:var(--cafe)}
+  .claim-pop .what{margin-top:6px;font-size:15.5px;color:var(--caramelo);font-weight:500}
+  .claim-pop label{display:grid;gap:6px;margin-top:18px;font-size:13.5px;color:var(--muted)}
+  .claim-pop input{font:inherit;font-size:16px;color:var(--ink);padding:12px 14px;border:1px solid var(--line);border-radius:12px;background:var(--white)}
+  .claim-pop input:focus-visible{outline:2px solid var(--caramelo);outline-offset:2px}
+  .claim-pop .msg{margin-top:12px;font-size:14px;line-height:1.45;color:var(--caramelo)}
+  .claim-pop .msg:empty{display:none}
+  .claim-pop .row{display:flex;gap:8px;margin-top:18px}
+  .claim-pop .row button{flex:1;font:inherit;font-size:15px;font-weight:600;padding:13px;border-radius:999px;cursor:pointer}
+  .claim-pop .ok{border:0;background:var(--cafe);color:#fff}
+  .claim-pop .ok[disabled]{opacity:.6;cursor:progress}
+  .claim-pop .cancel{border:1px solid var(--line);background:var(--white);color:var(--cafe)}
+
+  /* ===== rodapé com Pix ===== */
+  .pix{margin:44px 20px 0;border-radius:18px;background:var(--cafe);color:var(--rosado);padding:26px 20px;text-align:center}
+  .pix h2{font-family:var(--display);font-weight:400;font-size:30px;line-height:1.1;color:var(--mel)}
+  .pix p{font-size:14.5px;line-height:1.55;margin-top:8px;opacity:.95}
+  .pix-key{display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;margin-top:14px}
+  .pix-key span{font-weight:600;font-size:15px;color:#fff;user-select:all;word-break:break-all}
+  .pix-key button{font:inherit;font-size:13px;font-weight:600;padding:7px 14px;border-radius:999px;border:0;background:var(--mel);color:#06050D;cursor:pointer}
+  footer{margin:40px 24px 0;padding:24px 0 36px;border-top:1px solid var(--line);text-align:center;color:var(--muted)}
+  footer .f-event{font-family:var(--display);font-size:22px;color:var(--cafe)}
+  footer a{display:inline-block;margin-top:14px;color:var(--caramelo);font-weight:600;font-size:14.5px;text-underline-offset:3px}
+</style>
+</head>
+<body>
+<main>
+  <div class="top">
+    <a class="back" href="index.html"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M10 3.5 5.5 8l4.5 4.5"/></svg>Voltar ao convite</a>
+  </div>
+
+  <header class="hero">
+    <svg class="gift" viewBox="0 0 80 80" aria-hidden="true"><g class="doodle"><rect x="12" y="32" width="56" height="38" rx="3"/><path d="M8 32h64v-9H8z"/><path d="M40 23v47"/><path d="M40 23c-5-12-20-14-19-5 1 7 19 5 19 5zm0 0c5-12 20-14 19-5-1 7-19 5-19 5z"/></g></svg>
+    <h1>Lista de presentes</h1>
+    <p class="names">Alisson e Dayanne</p>
+    <p>Criamos esta lista, separada por cômodo, com links para facilitar a compra e com itens no tamanho ideal para o apê. Você fica livre para comprar pelo link ou por outro meio que achar melhor, seguindo a indicação.</p>
+    <p class="claim-hint" id="claim-hint" hidden>Escolheu um presente? Toque em <b>Vou dar este</b> no item, assim ninguém repete.</p>
+    <p class="pending" id="pending" hidden>Alguns itens ainda estão sem link. Em breve a lista estará completa.</p>
+  </header>
+
+  <nav class="rooms-nav" aria-label="Cômodos"><ul id="nav"></ul></nav>
+
+  <div id="list"></div>
+
+  <section class="pix" aria-labelledby="pix-title">
+    <h2 id="pix-title">Prefere dar em Pix?</h2>
+    <p>O presente pode chegar pelo condomínio ou, se ficar mais fácil, por Pix:</p>
+    <div class="pix-key">
+      <span id="pix-key">diariodoape810@gmail.com</span>
+      <button type="button" id="copy-pix">Copiar chave</button>
+    </div>
+  </section>
+
+  <footer>
+    <p class="f-event">Chá de Casa Nova do Apê 810</p>
+    <p>Terça, 8 de dezembro, às 19h</p>
+    <a href="index.html">Voltar ao convite</a>
+  </footer>
+
+  <dialog class="claim-pop" id="claim-pop" aria-labelledby="claim-title">
+    <form method="dialog" id="claim-form">
+      <h2 id="claim-title">Vou dar este presente</h2>
+      <p class="what" id="claim-what"></p>
+      <label for="claim-name">Seu nome (só Alisson e Dayanne vão ver)
+        <input id="claim-name" autocomplete="name" maxlength="80" placeholder="Nome e sobrenome">
+      </label>
+      <p class="msg" id="claim-msg" role="status"></p>
+      <div class="row">
+        <button type="button" class="cancel" id="claim-cancel">Cancelar</button>
+        <button type="submit" class="ok" id="claim-ok">Confirmar</button>
+      </div>
+    </form>
+  </dialog>
+</main>
+
+<script>
+  /* =====================================================================
+     LISTA DE PRESENTES
+     Para incluir ou trocar um link, edite o item abaixo:
+       ['nome do item']                         -> sem link (mostra "link em breve")
+       ['nome do item', 'https://...']          -> um link
+       ['nome do item', 'https://...', 'https://...'] -> mais de uma opção
+     A foto do item fica em img/presentes/ com o código do (primeiro) link:
+       https://meli.la/1MAWjUm  ->  img/presentes/1MAWjUm.jpg
+     Sem a foto, aparece um espaço com o desenho do cômodo.
+     ===================================================================== */
+  const ROOMS = [
+    { id:'eletro', title:'Eletrodomésticos', icon:'tv', items:[
+      ['robô aspirador', 'https://meli.la/1MAWjUm'],
+      ['máquina lava e seca', 'https://meli.la/1S7Bj4E'],
+      ['TV', 'https://meli.la/2PrvF7V'],
+      ['cafeteira', 'https://meli.la/2phr5Jv'],
+      ['ferro de passar a vapor de cabide', 'https://meli.la/2BmV8Pn'],
+    ]},
+    { id:'cozinha', title:'Cozinha', icon:'pot', items:[
+      ['jogo de panelas inox', 'https://meli.la/2KFZkCt'],
+      ['frigideira'],
+      ['frigideira com tampa', 'https://meli.la/11pVs8g'],
+      ['panela de pressão', 'https://meli.la/1GY3Tdh'],
+      ['kit com espátulas'],
+      ['kit de facas', 'https://meli.la/2dpH8cc'],
+      ['tábua de carne', 'https://meli.la/2rrP5jz'],
+      ['moedor de sal e pimenta (madeira ou branco)'],
+      ['saleiro e porta-alho', 'https://meli.la/2tjiTuz'],
+      ['porta óleo e azeite', 'https://meli.la/2tX1tXE'],
+      ['potes herméticos com tampa'],
+      ['garrafas de água e suco para geladeira', 'https://meli.la/2377miW'],
+      ['organizadores de armário', 'https://meli.la/1gQ2RLG'],
+      ['organizadores multiuso', 'https://meli.la/1esAYHk'],
+      ['organizadores de geladeira', 'https://meli.la/1A3FUq1'],
+      ['organizadores de talheres'],
+      ['bandeja giratória', 'https://meli.la/2dPpHqn'],
+      ['prateleira dupla de bambu ou madeira'],
+      ['escorredor de louças de pedra', 'https://meli.la/1bKYxyh'],
+      ['lixeira inox 30 litros', 'https://link.amazon/B08c0XLRD'],
+    ]},
+    { id:'mesa', title:'Mesa posta', icon:'plate', items:[
+      ['kit mesa posta', 'https://meli.la/31VLWoB'],
+      ['aparelho de jantar com bordas douradas'],
+      ['aparelho de jantar preto', 'https://link.amazon/B0fX74oCw'],
+      ['jogo de talheres inox', 'https://meli.la/1DZF7z9'],
+      ['jogo de talheres dourados'],
+      ['jogo de copos com jarra', 'https://meli.la/1QFbpbC'],
+      ['jarra de suco com copos de vidro', 'https://meli.la/1W45PFK'],
+      ['jogo de sobremesa', 'https://meli.la/2U2QXd4'],
+      ['jogo americano sousplat dupla face + porta-copos'],
+      ['kit de travessas de porcelana', 'https://meli.la/2oXYjef'],
+      ['conjunto de bowls de cerâmica'],
+      ['jogo de tigelas', 'https://meli.la/1p2dc9b'],
+      ['saladeira', 'https://meli.la/2HF5pK7'],
+      ['petisqueira', 'https://meli.la/2uWFZiG'],
+      ['boleira com tampa', 'https://meli.la/2TP3h4Y'],
+      ['bule', 'https://meli.la/2smPG4U'],
+    ]},
+    { id:'sala', title:'Sala e corredor', icon:'sofa', items:[
+      ['conjunto de almofadas para sofá'],
+      ['kit de manta e capas de almofada decoradas'],
+      ['tapete'],
+      ['quadros decorativos'],
+      ['abajur de mesa'],
+      ['jarro de flores'],
+      ['cantinho do café'],
+    ]},
+    { id:'servico', title:'Área de serviço', icon:'bucket', items:[
+      ['varal mágico'],
+      ['kit dispenser para produtos de limpeza'],
+      ['balde e bacia dobráveis'],
+      ['mop de limpeza'],
+      ['tapete'],
+    ]},
+    { id:'quarto', title:'Quarto', icon:'bed', items:[
+      ['abajur'],
+      ['cabides'],
+      ['organizador de maquiagem'],
+      ['colmeias organizadoras'],
+      ['caixas organizadoras'],
+      ['kit cobre-leito neutro'],
+      ['kit cobre-leito colorido ou decorado'],
+      ['jogo de lençol cama queen'],
+      ['jogo de lençol cama queen estampado'],
+      ['travesseiros'],
+      ['tapete'],
+      ['kit escritório'],
+    ]},
+    { id:'banheiro', title:'Banheiro', icon:'towel', items:[
+      ['kit de toalhas'],
+      ['toalhas de rosto'],
+      ['toalhas de banho'],
+      ['kit de sabonete', 'https://meli.la/32tAmW1'],
+      ['kit de acessórios'],
+      ['lixeira', 'https://link.amazon/B06qg2Qrw'],
+      ['tapete de pedra', 'https://meli.la/29yBVwX'],
+      ['kit para shampoo, condicionador e sabonete líquido'],
+    ]},
+    { id:'varanda', title:'Varanda', icon:'hammock', items:[
+      ['rede'],
+      ['mesa dobrável'],
+      ['churrasqueira portátil'],
+    ]},
+  ];
+
+  // desenhos em traço, no mesmo estilo do convite
+  const ICONS = {
+    plate:'<circle cx="24" cy="26" r="13"/><circle cx="24" cy="26" r="8"/><path d="M5 10v8a2 2 0 0 0 4 0v-8M7 18v22M41 10c-3 2-4 8-4 14h4v16"/>',
+    tv:'<rect x="6" y="10" width="36" height="24" rx="3"/><path d="M18 40h12M24 34v6"/>',
+    pot:'<path d="M8 20h32v14a6 6 0 0 1-6 6H14a6 6 0 0 1-6-6z"/><path d="M8 24H3M40 24h5M6 20c2-6 34-6 36 0"/><path d="M21 12h6"/>',
+    sofa:'<path d="M10 22v-6a4 4 0 0 1 4-4h20a4 4 0 0 1 4 4v6"/><path d="M6 22a3 3 0 0 1 6 0v4h24v-4a3 3 0 0 1 6 0v10H6z"/><path d="M10 32v5M38 32v5"/>',
+    bucket:'<path d="M10 16h28l-3 24H13z"/><path d="M10 16c0-8 28-8 28 0"/><path d="M14 24h20"/>',
+    bed:'<path d="M6 36V12M6 26h36v10"/><path d="M42 36v-6"/><rect x="10" y="18" width="10" height="8" rx="3"/><path d="M20 26v-4h22v4"/>',
+    towel:'<path d="M8 10h32"/><path d="M14 10v28h20V10"/><path d="M14 30h20M14 34h20"/>',
+    hammock:'<path d="M4 10v30M44 10v30"/><path d="M4 16c6 16 34 16 40 0"/><path d="M4 16c8 8 32 8 40 0"/>',
+  };
+  const ARROW = '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M6 3.5h6.5V10M12.5 3.5 4 12"/></svg>';
+
+  function store(url){
+    if (/meli\.la|mercadoli/i.test(url)) return 'Mercado Livre';
+    if (/amazon|amzn/i.test(url)) return 'Amazon';
+    if (/shopee/i.test(url)) return 'Shopee';
+    if (/magazineluiza|magalu/i.test(url)) return 'Magalu';
+    return 'Ver item';
+  }
+  const esc = s => s.replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+  // código fixo de cada item na planilha: cômodo + nome sem acento (ex.: cozinha-kit-de-facas)
+  const slug = s => s.normalize('NFD').replace(/[̀-ͯ]/g,'').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
+
+  const nav = document.getElementById('nav'), list = document.getElementById('list');
+  // o aviso de "links sendo atualizados" só aparece enquanto existir item sem link
+  document.getElementById('pending').hidden = ROOMS.every(r=>r.items.every(i=>i.length > 1));
+  ROOMS.forEach(r=>{
+    const linked = r.items.filter(i=>i.length>1).length;
+    nav.insertAdjacentHTML('beforeend', `<li><a href="#${r.id}">${esc(r.title)}</a></li>`);
+    const empty = `<span class="thumb empty"><svg viewBox="0 0 48 48" aria-hidden="true"><g class="doodle">${ICONS[r.icon]}</g></svg></span>`;
+    const rows = r.items.map(([name, ...urls])=>{
+      const many = urls.length > 1;
+      const action = urls.length
+        ? `<span class="links">${urls.map((u,i)=>`<a class="shop" href="${esc(u)}" target="_blank" rel="noopener" aria-label="${esc(name)}: ${store(u)}${many?`, opção ${i+1}`:''} (abre em nova aba)">${many?`Opção ${i+1}`:store(u)}${ARROW}</a>`).join('')}</span>`
+        : `<span class="soon">link em breve</span>`;
+      const code = urls.length ? urls[0].replace(/[?#].*$/,'').split('/').filter(Boolean).pop() : '';
+      const thumb = code
+        ? `<a class="thumb" href="${esc(urls[0])}" target="_blank" rel="noopener" tabindex="-1" aria-hidden="true"><img src="img/presentes/${esc(code)}.jpg" alt="" loading="lazy" width="72" height="72"></a>`
+        : empty;
+      return `<li class="item" data-id="${r.id}-${slug(name)}" data-name="${esc(name)}">${thumb}<span class="info"><span class="name">${esc(name)}</span><span class="actions">${action}</span></span></li>`;
+    }).join('');
+    list.insertAdjacentHTML('beforeend', `
+      <section class="room" id="${r.id}" aria-labelledby="h-${r.id}">
+        <div class="room-head">
+          <svg viewBox="0 0 48 48" aria-hidden="true"><g class="doodle">${ICONS[r.icon]}</g></svg>
+          <h2 id="h-${r.id}">${esc(r.title)}</h2>
+          <span class="count">${r.items.length} ${r.items.length===1?'item':'itens'}</span>
+        </div>
+        <ul class="items">${rows}</ul>
+      </section>`);
+  });
+
+  // link novo ainda sem foto na pasta: volta para o espaço com desenho
+  list.querySelectorAll('.thumb img').forEach(img=>img.addEventListener('error',()=>{
+    const room = ROOMS.find(r=>r.id===img.closest('.room').id);
+    img.parentElement.outerHTML = `<span class="thumb empty"><svg viewBox="0 0 48 48" aria-hidden="true"><g class="doodle">${ICONS[room.icon]}</g></svg></span>`;
+  }));
+
+  // destaca na barra o cômodo que está na tela
+  const links = [...nav.querySelectorAll('a')];
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const io = new IntersectionObserver(es=>{
+    es.forEach(e=>{ if (!e.isIntersecting) return;
+      links.forEach(a=>{
+        const on = a.getAttribute('href') === '#'+e.target.id;
+        a.setAttribute('aria-current', on);
+        // rola só a barra de cômodos, na horizontal. scrollIntoView também rolava a página
+        // (e a página-mãe, quando aberta dentro de um quadro), puxando o leitor de volta para cima.
+        if (on) nav.scrollTo({left: a.parentElement.offsetLeft - (nav.clientWidth - a.offsetWidth)/2, behavior: reduce ? 'auto' : 'smooth'});
+      });
+    });
+  }, {rootMargin:'-80px 0px -65% 0px'});
+  document.querySelectorAll('.room').forEach(s=>io.observe(s));
+
+  // abre sempre no topo. Na prévia, o visualizador reaproveita a rolagem do convite
+  // ao trocar de página; até a pessoa mexer na tela, qualquer rolagem herdada volta ao topo.
+  (function(){
+    if (location.hash) return;
+    try { history.scrollRestoration = 'manual'; } catch(_) {}
+    let touched = false;
+    const mark = ()=>{ touched = true; };
+    ['wheel','touchstart','pointerdown','keydown'].forEach(ev=>addEventListener(ev, mark, {once:true, passive:true}));
+    const toTop = ()=>{ if (!touched && scrollY > 0) scrollTo({top:0, left:0, behavior:'instant'}); };
+    toTop();
+    addEventListener('load', toTop);
+    addEventListener('pageshow', toTop);
+    addEventListener('scroll', toTop, {passive:true});
+    setTimeout(()=>removeEventListener('scroll', toTop), 2500);
+  })();
+
+  /* =====================================================================
+     "VOU DAR ESTE PRESENTE" — escolhas guardadas na planilha do Google
+     Cole abaixo a URL do app da Web do Apps Script (termina em /exec).
+     Enquanto estiver vazia, ou se a planilha não responder, os botões não aparecem
+     e a lista funciona como antes.
+     ===================================================================== */
+  const PRESENTES_API = 'https://script.google.com/macros/s/AKfycbwwa1ZaAlbfqu0nPgevQkBZlaJWGtz2xrSuUf8QZEICT4QowPiMbJXIdkCoepKjAA7g/exec';
+
+  (function(){
+    if (!PRESENTES_API) return;
+    const KEY = 'ape810-presentes';
+    const load = k => { try { return JSON.parse(localStorage.getItem(k)) || {}; } catch(_) { return {}; } };
+    const save = (k,v) => { try { localStorage.setItem(k, JSON.stringify(v)); } catch(_) {} };
+    let mine = load(KEY);                 // { item_id: código para desfazer }
+    let taken = new Set();
+    const GIFT = '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 7h11v6.5h-11zM1.5 4.5h13V7h-13zM8 4.5v9M8 4.5C6.5 1.5 3.5 2 4.5 3.6 5.3 4.6 8 4.5 8 4.5zm0 0c1.5-3 4.5-2.5 3.5-.9C10.7 4.6 8 4.5 8 4.5z"/></svg>';
+    const items = [...document.querySelectorAll('.item[data-id]')];
+
+    async function call(body){
+      const opt = body
+        ? {method:'POST', headers:{'Content-Type':'text/plain;charset=utf-8'}, body:JSON.stringify(body)}
+        : {cache:'no-store'};
+      const res = await fetch(PRESENTES_API, opt);
+      if (!res.ok) throw new Error('HTTP ' + res.status);
+      return res.json();
+    }
+
+    function paint(){
+      // um código guardado aqui que não está mais na planilha (apagado à mão) deixa de valer
+      Object.keys(mine).forEach(id=>{ if (!taken.has(id)) delete mine[id]; });
+      save(KEY, mine);
+      items.forEach(li=>{
+        const id = li.dataset.id, isMine = id in mine, isTaken = taken.has(id) && !isMine;
+        li.classList.toggle('mine', isMine);
+        li.classList.toggle('taken', isTaken);
+        const actions = li.querySelector('.actions');
+        actions.querySelectorAll('.claim,.status,.undo').forEach(n=>n.remove());
+        if (isMine) {
+          actions.insertAdjacentHTML('beforeend', `<span class="status">Você vai dar este presente</span><button type="button" class="undo">Desfazer</button>`);
+        } else if (isTaken) {
+          actions.insertAdjacentHTML('beforeend', `<span class="status">Já escolhido por um convidado</span>`);
+        } else {
+          actions.insertAdjacentHTML('beforeend', `<button type="button" class="claim" aria-label="Vou dar este presente: ${esc(li.dataset.name)}">${GIFT}Vou dar este</button>`);
+        }
+      });
+    }
+
+    // janela de confirmação
+    const pop = document.getElementById('claim-pop'), form = document.getElementById('claim-form');
+    const nameIn = document.getElementById('claim-name'), msg = document.getElementById('claim-msg');
+    const ok = document.getElementById('claim-ok');
+    let current = null;
+    function openPop(li){
+      current = li; msg.textContent = ''; ok.disabled = false; ok.textContent = 'Confirmar';
+      document.getElementById('claim-what').textContent = li.querySelector('.name').textContent.replace(/^./, c=>c.toUpperCase());
+      try { nameIn.value = localStorage.getItem(KEY + '-nome') || ''; } catch(_) {}
+      pop.showModal(); nameIn.focus();
+    }
+    document.getElementById('claim-cancel').addEventListener('click', ()=>pop.close());
+    pop.addEventListener('click', e=>{ if (e.target === pop) pop.close(); });
+
+    form.addEventListener('submit', async e=>{
+      e.preventDefault();
+      if (!current) return;
+      const li = current, nome = nameIn.value.trim();
+      try { localStorage.setItem(KEY + '-nome', nome); } catch(_) {}
+      ok.disabled = true; ok.textContent = 'Salvando…'; msg.textContent = '';
+      try {
+        const r = await call({acao:'escolher', id:li.dataset.id, item:li.dataset.name, nome});
+        if (r.escolhidos) taken = new Set(r.escolhidos);
+        if (r.ok) { mine[li.dataset.id] = r.codigo; paint(); pop.close(); return; }
+        paint();
+        msg.textContent = r.erro === 'ja_escolhido'
+          ? 'Outro convidado escolheu este presente há pouco. Que tal escolher outro item da lista?'
+          : 'Não deu para salvar a escolha. Tente de novo em alguns segundos.';
+        ok.textContent = r.erro === 'ja_escolhido' ? 'Escolhido' : 'Tentar de novo';
+        ok.disabled = r.erro === 'ja_escolhido';
+      } catch(_) {
+        msg.textContent = 'Sem conexão com a lista agora. Verifique a internet e tente de novo.';
+        ok.disabled = false; ok.textContent = 'Tentar de novo';
+      }
+    });
+
+    document.getElementById('list').addEventListener('click', async e=>{
+      const li = e.target.closest('.item'); if (!li) return;
+      if (e.target.closest('.claim')) { openPop(li); return; }
+      const undo = e.target.closest('.undo');
+      if (undo) {
+        undo.disabled = true; undo.textContent = 'Desfazendo…';
+        try {
+          const r = await call({acao:'desfazer', id:li.dataset.id, codigo:mine[li.dataset.id]});
+          if (r.escolhidos) taken = new Set(r.escolhidos);
+          if (r.ok) delete mine[li.dataset.id];
+        } catch(_) {}
+        paint();
+      }
+    });
+
+    call().then(r=>{
+      if (!r || !r.ok) return;
+      taken = new Set(r.escolhidos || []);
+      document.getElementById('claim-hint').hidden = false;
+      paint();
+    }).catch(()=>{ /* planilha fora do ar: a lista segue sem os botões */ });
+  })();
+
+  // copiar chave Pix
+  const btn = document.getElementById('copy-pix');
+  btn.addEventListener('click', ()=>{
+    const el = document.getElementById('pix-key');
+    const flash = m => { btn.textContent = m; setTimeout(()=>btn.textContent='Copiar chave', 2000); };
+    const select = ()=>{ const r=document.createRange(); r.selectNodeContents(el); const s=getSelection(); s.removeAllRanges(); s.addRange(r); flash('Selecionado'); };
+    try { navigator.clipboard.writeText(el.textContent.trim()).then(()=>flash('Copiado!'), select); } catch(_) { select(); }
+  });
+</script>
+</body>
+</html>

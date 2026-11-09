@@ -1,0 +1,666 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chá de Casa Nova do Apê 810</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Caveat:wght@500;700&family=Great+Vibes&family=Josefin+Sans:wght@300&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    /* paleta do casal */
+    --mel:#BFB5AA; --damasco:#C9A9A0; --caramelo:#8C5350; --cafe:#402C29; --nevoa:#FCF9F7;
+    /* derivados */
+    --white:#FFFFFF; --ink:#3A2826; --muted:#76605C; --line:#E3D4CE; --cream:#FAF4F1;
+    --display:"Instrument Serif",Georgia,serif; --hand:"Caveat",cursive; --script:"Great Vibes",cursive; --sans:"Instrument Sans",system-ui,sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  [hidden]{display:none!important}
+  html{scroll-behavior:smooth}
+  body{font-variant-numeric:lining-nums;background:#F2E8E3;color:var(--ink);font-family:var(--sans);font-size:16px;-webkit-font-smoothing:antialiased}
+  main{max-width:460px;margin:0 auto;background:var(--nevoa);overflow:hidden;position:relative}
+  a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(--mel);outline-offset:3px}
+  .hand{font-family:var(--hand);font-weight:500}
+  .doodle{fill:none;stroke:var(--cafe);stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+
+  /* ================= HERO ================= */
+  /* capa: 1) Chá de Casa Nova  2) plaquinha Apê 810  3) nomes escritos à mão  4) data */
+  .hero{position:relative;padding:122px 20px 140px;text-align:center}
+  .deco{position:absolute;pointer-events:none;will-change:transform;opacity:.45;transform:translateY(var(--py,0px))}
+  .deco svg{width:100%;height:auto;display:block}
+  .d-moka{width:112px;right:-4px;bottom:8px}
+  .d-moka svg{transform:rotate(7deg)}
+  .d-pot{width:150px;left:-14px;bottom:18px}
+  .d-pot svg{transform:rotate(-10deg)}
+
+  /* porta-utensílios: balança sozinho e responde ao toque */
+  .rack{position:absolute;left:0;right:0;top:0;height:auto;display:block;width:min(260px,70%);margin:0 auto}
+  .rack .doodle{stroke-width:1.6}
+  .tool{transform-box:view-box;cursor:pointer;animation:sway 4.5s ease-in-out infinite alternate;animation-delay:var(--sd,0s)}
+  .tool.swing{animation:swing 1.8s cubic-bezier(.3,.1,.3,1)}
+  @keyframes sway{from{transform:rotate(-2.5deg)}to{transform:rotate(2.5deg)}}
+  @keyframes swing{0%{transform:rotate(0)}15%{transform:rotate(18deg)}35%{transform:rotate(-12deg)}55%{transform:rotate(7deg)}75%{transform:rotate(-3deg)}100%{transform:rotate(0)}}
+
+  .event{font-family:var(--display);font-weight:400;color:var(--cafe);line-height:.86;letter-spacing:-.02em;text-wrap:balance}
+  .event span{display:block;font-size:clamp(70px,22.5vw,104px)}
+  /* telhadinho de traço fino com chaminé sobre o APÊ 810 */
+  .house{display:inline-grid;justify-items:center;margin-top:22px}
+  .roof{width:min(240px,64vw);height:auto;fill:none;stroke:var(--caramelo);stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;overflow:visible}
+  .roof .smoke{stroke-width:1.3;opacity:.7}
+  .house b{font-family:"Josefin Sans",system-ui,sans-serif;font-weight:300;font-size:clamp(20px,6vw,25px);letter-spacing:.34em;padding-left:.34em;color:var(--caramelo);line-height:1;margin-top:-36px;margin-bottom:16px}
+  .event .e1{font-size:clamp(44px,13.5vw,62px);line-height:1;margin-bottom:2px}
+
+  .plaque{display:inline-flex;align-items:center;gap:14px;margin-top:26px;padding:12px 22px;border-radius:14px;background:var(--cafe);
+    box-shadow:0 10px 18px -10px rgba(64,44,41,.65),inset 0 0 0 2px var(--cafe),inset 0 0 0 4px rgba(217,159,89,.65)}
+  .plaque i{width:7px;height:7px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#F3D3A6,#B98448)}
+  .plaque b{font-family:var(--display);font-weight:400;font-size:clamp(32px,9.6vw,42px);letter-spacing:.12em;color:var(--mel);line-height:1;padding-left:.12em}
+
+  .names{display:block;width:min(340px,92%);margin:22px auto 0;cursor:pointer;overflow:visible}
+  .names text{font-family:"Great Vibes",cursive;font-size:56px;fill:var(--caramelo);stroke:var(--caramelo);stroke-width:.6}
+  .names.drawing text{fill:transparent;stroke-dasharray:900;stroke-dashoffset:900;animation:write 2.6s ease-in-out forwards,ink .8s ease 2.2s forwards}
+  .names.floating{animation:float 5s ease-in-out infinite}
+  @keyframes write{to{stroke-dashoffset:0}}
+  @keyframes ink{to{fill:var(--caramelo)}}
+  @keyframes float{0%,100%{transform:translateY(0) rotate(-1deg)}50%{transform:translateY(-5px) rotate(1deg)}}
+
+  .when{display:inline-flex;align-items:center;gap:10px;margin-top:20px;padding:11px 20px;border-radius:999px;border:1.5px solid var(--caramelo);
+    color:var(--cafe);text-decoration:none;font-size:16px;font-weight:500;background:var(--white)}
+  .when svg{width:20px;height:20px;fill:none;stroke:var(--caramelo);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+  .when:active{transform:scale(.97)}
+  .when-hint{margin-top:8px;font-family:var(--hand);font-size:19px;color:var(--muted)}
+  .countdown{margin-top:12px}
+  .countdown span{display:inline-block;padding:5px 16px 6px;border-radius:999px;background:var(--caramelo);color:var(--cream);
+    font-family:var(--hand);font-weight:700;font-size:23px;line-height:1.1;transform:rotate(-2deg)}
+  .cta-row{margin-top:26px}
+  .scroll-cta{display:inline-flex;align-items:center;gap:8px;padding:14px 24px;border-radius:999px;background:var(--cafe);color:#fff;text-decoration:none;font-weight:500;font-size:15px}
+  .scroll-cta svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round}
+
+  @media (prefers-reduced-motion:reduce){
+    .tool,.tool.swing,.names.floating{animation:none}
+    .names.drawing text{animation:none;fill:var(--caramelo);stroke-dasharray:none}
+    .deco{transform:none!important}
+  }
+
+  /* ================= ENVELOPE ================= */
+  .arch{position:relative;margin:0 14px;background:var(--caramelo);border-radius:220px 220px 0 0;padding:25% 7% 0}
+  .card{position:relative;z-index:1;background:var(--white);padding:34px 22px 170px;text-align:center;
+    transform:translateY(120px);opacity:0;transition:transform 1.4s cubic-bezier(.2,.7,.2,1),opacity .6s}
+  .card.open{transform:none;opacity:1}
+  @media (prefers-reduced-motion:reduce){.card{transform:none;opacity:1;transition:none}}
+  .card .names2{font-family:var(--script);font-size:40px;color:var(--caramelo);line-height:1.1}
+  .card p{font-size:15px;line-height:1.65;color:var(--muted);margin-top:10px}
+  .when-label{margin-top:22px;font-family:var(--hand);font-size:22px;color:var(--caramelo)}
+  .date{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:12px;margin-top:28px}
+  .date .side{white-space:nowrap;font-family:var(--display);font-size:22px;text-transform:uppercase;color:var(--caramelo);border-top:1px solid var(--mel);border-bottom:1px solid var(--mel);padding:4px 0 3px}
+  .date .day{font-family:var(--display);font-size:104px;line-height:.8;color:var(--cafe)}
+  .month{font-family:var(--display);font-size:28px;text-transform:uppercase;letter-spacing:.12em;color:var(--caramelo);margin-top:6px}
+  .notice{margin-top:18px;font-size:13.5px;line-height:1.5;color:var(--muted)}
+  .notice small{display:block;margin-top:4px;font-size:11.5px;opacity:.85}
+  .notice .fit{display:block;white-space:nowrap;font-size:13px;margin-inline:-12px}
+  .envelope{position:relative;z-index:2;margin:-140px -4% 0;height:210px}
+  .envelope > svg{display:block;width:100%;height:100%}
+  .envelope .mini{position:absolute;left:50%;top:34px;transform:translateX(-50%) rotate(-3deg);width:190px;height:auto;filter:drop-shadow(0 8px 10px rgba(64,44,41,.3))}
+  .seal{position:absolute;left:50%;top:62px;transform:translateX(-50%) rotate(-8deg);width:96px;height:96px;border-radius:50%;
+    background:radial-gradient(circle at 34% 30%,#B8807C,#9C625E 45%,#8C5350 100%);display:grid;place-items:center;
+    box-shadow:0 8px 16px -8px rgba(64,44,41,.6),inset 0 0 0 6px rgba(255,255,255,.14),inset 0 -6px 10px rgba(64,44,41,.35)}
+  .seal span{display:grid;justify-items:center;line-height:.9;font-family:var(--display);font-size:32px;color:#FAF4F1;letter-spacing:.02em;text-shadow:0 1px 0 rgba(64,44,41,.5)}
+  .seal small{font-size:15px;letter-spacing:.1em;text-transform:uppercase;margin-bottom:2px}
+  .sign{position:absolute;right:22px;bottom:10px;font-family:var(--hand);font-size:24px;color:var(--caramelo)}
+
+  /* ================= LOCATION + ACCESS ================= */
+  .loc{background:var(--cafe);color:#F2E8E3;text-align:center;padding:48px 24px 52px}
+  .loc svg.pin{width:30px;height:30px;color:var(--mel)}
+  .loc h2{font-family:var(--display);font-weight:400;font-size:46px;color:var(--mel);margin-top:4px;line-height:1}
+  .loc p{font-size:15px;line-height:1.6;opacity:.95;margin-top:10px}
+  .loc p b{font-weight:600}
+  .loc .venue{display:inline-block;margin-top:14px;padding:6px 16px;border:1px solid rgba(191,181,170,.7);border-radius:999px;color:var(--mel);font-weight:500;font-size:14.5px;opacity:1}
+  .btn-light{display:inline-block;margin-top:20px;padding:13px 26px;border-radius:999px;background:var(--mel);color:#06050D;font-weight:600;text-decoration:none;font-size:15px}
+  .access{background:var(--cafe);padding:0 18px 40px}
+  .access .panel{background:var(--nevoa);border-radius:22px;padding:24px 16px 22px;text-align:center}
+  .access h3{font-family:var(--display);font-weight:400;font-size:25px;color:var(--cafe)}
+  .tiles{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin:16px auto 0;max-width:280px}
+  .tile{display:grid;justify-items:center;gap:8px;text-decoration:none;color:var(--ink);font-size:14px;line-height:1.25;font-weight:500}
+  .tile i{width:66px;height:66px;border-radius:20px;background:var(--caramelo);display:grid;place-items:center;box-shadow:inset 0 -4px 0 rgba(0,0,0,.16);transition:transform .2s}
+  .tile:active i{transform:scale(.94)}
+  .tile svg{width:30px;height:30px;fill:none;stroke:#FAF4F1;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+
+  /* ================= SECTIONS ================= */
+  .sec{position:relative;padding:56px 24px 8px}
+  .sec h2{font-family:var(--display);font-weight:400;font-size:48px;line-height:1;color:var(--cafe);text-align:center}
+  .sec .accent{display:block;text-align:center;font-family:var(--hand);font-weight:700;font-size:26px;color:var(--caramelo);transform:rotate(-3deg);margin-top:2px}
+  .sec .lead{text-align:center;color:var(--muted);font-size:15px;line-height:1.6;margin:12px auto 0;max-width:33ch}
+  .sec .lead a{color:var(--caramelo);font-weight:600;text-underline-offset:3px}
+  .sec .lead b{color:var(--cafe);font-weight:600}
+  .sec:focus{outline:none}
+  .sec.reveal{animation:reveal .6s cubic-bezier(.2,.7,.2,1)}
+  @keyframes reveal{from{opacity:0;transform:translateY(-16px)}to{opacity:1;transform:none}}
+  @media (prefers-reduced-motion:reduce){.sec.reveal{animation:none}}
+  .sec .bg-doodle{position:absolute;opacity:.18;pointer-events:none}
+  form{position:relative;margin-top:22px;display:grid;gap:12px}
+  label[hidden]{display:none}
+  label{display:grid;gap:6px;font-size:13.5px;color:var(--muted)}
+  input{font:inherit;font-size:16px;color:var(--ink);padding:13px 14px;border:1px solid var(--line);border-radius:12px;background:var(--white)}
+  .choice{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .choice button{font:inherit;padding:12px;border-radius:12px;border:1px solid var(--line);background:var(--white);color:var(--ink);cursor:pointer}
+  .choice button[aria-pressed=true]{background:var(--caramelo);border-color:var(--caramelo);color:#fff}
+  .primary{font:inherit;font-weight:600;font-size:16px;padding:15px;border:0;border-radius:999px;background:var(--cafe);color:#fff;cursor:pointer;margin-top:4px;text-align:center;text-decoration:none;display:block}
+
+  /* estilo da casa */
+  .swatches{display:grid;grid-template-columns:repeat(5,1fr);gap:4px;margin-top:24px}
+  .sw{display:grid;justify-items:center;gap:6px;font-family:var(--hand);font-size:19px;color:var(--muted)}
+  .sw i{width:52px;height:52px;border-radius:50%;border:4px solid var(--white);box-shadow:0 6px 12px -8px rgba(64,44,41,.5)}
+  /* materiais */
+  .m-branco{background:radial-gradient(circle at 35% 30%,#FFFFFF,#F1EEEA)}
+  .sw i.m-branco{box-shadow:0 6px 12px -8px rgba(64,44,41,.5),inset 0 0 0 1px #E2D9D0}
+  .m-inox{background:linear-gradient(135deg,#F1F2F3 0%,#B9BEC3 30%,#E9EBED 48%,#9DA3A9 70%,#D9DCDF 100%)}
+  .m-freijo{background:#B08454 url(img/freijo.jpg) center/cover}
+  .m-vidro{background:linear-gradient(135deg,rgba(255,255,255,.95) 0%,rgba(214,234,232,.75) 40%,rgba(184,214,212,.6) 62%,rgba(255,255,255,.9) 100%),#E3EFEE}
+  .m-marrom{background:radial-gradient(circle at 35% 30%,#7A4A33,#5A3424)}
+  .rail{display:flex;gap:18px;overflow-x:auto;scroll-snap-type:x mandatory;margin-top:24px;padding:18px 24px 26px;margin:0 -24px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+  .rail::-webkit-scrollbar{display:none}
+  .rail-wrap{position:relative}
+  .rail-arrow{position:absolute;z-index:2;top:calc(50% + 12px);transform:translateY(-50%);width:46px;height:46px;border-radius:50%;border:0;cursor:pointer;
+    background:var(--cafe);color:#fff;display:grid;place-items:center;box-shadow:0 8px 18px -8px rgba(64,44,41,.7),0 0 0 4px rgba(255,255,255,.85)}
+  .rail-arrow svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+  .rail-arrow[hidden]{display:none}
+  .rail-arrow.next{right:-6px}
+  .rail-arrow.prev{left:-6px}
+  .rail-arrow.nudge{animation:nudge 1.4s ease-in-out .8s 3}
+  @keyframes nudge{0%,100%{transform:translateY(-50%)}50%{transform:translate(6px,-50%)}}
+  @media (prefers-reduced-motion:reduce){.rail-arrow.nudge{animation:none}}
+  .pol{flex:0 0 66%;scroll-snap-align:center;background:var(--white);padding:10px 10px 6px;border:0;cursor:zoom-in;text-align:center;
+    box-shadow:0 14px 24px -16px rgba(64,44,41,.55);transform:rotate(var(--r,0deg));transition:transform .3s}
+  .pol:nth-child(odd){--r:-2.5deg}.pol:nth-child(even){--r:2deg}
+  .pol img{display:block;width:100%;aspect-ratio:4/5;object-fit:cover}
+  .pol span{display:block;font-family:var(--hand);font-size:23px;color:var(--cafe);padding:6px 0 2px}
+  .pol[hidden]{display:none}
+  .swipe{text-align:center;font-family:var(--hand);font-size:19px;color:var(--muted);margin-top:-8px}
+  .pix{margin:18px auto 0;max-width:320px;border-radius:14px;background:var(--cream);border:1px solid var(--line);padding:14px 16px;text-align:center}
+  .pix b{display:block;font-family:var(--display);font-size:21px;font-weight:400;line-height:1.15;color:var(--cafe)}
+  .pix p{color:var(--muted);font-size:13.5px;line-height:1.45;margin-top:4px}
+  .pix-key{display:flex;align-items:center;justify-content:center;gap:8px;flex-wrap:wrap;margin-top:10px}
+  .pix-key span{font-size:14px;font-weight:600;color:var(--cafe);user-select:all;word-break:break-all}
+  .pix-key .addr{font-weight:500;font-size:13px;line-height:1.5;word-break:normal;flex-basis:100%}
+  .pix .or{margin-top:14px;padding-top:12px;border-top:1px solid var(--line)}
+  .pix-key button{font:inherit;font-size:12.5px;font-weight:500;padding:5px 12px;border-radius:999px;border:1px solid var(--caramelo);background:none;color:var(--caramelo);cursor:pointer}
+
+  dialog{border:0;padding:10px;background:transparent;max-width:94vw;max-height:96vh;margin:auto;overflow:hidden;scrollbar-width:none}
+  dialog::-webkit-scrollbar{display:none}
+  dialog::backdrop{background:rgba(64,44,41,.82)}
+
+  /* pop-up de confirmação de presença */
+  dialog.rsvp-pop{position:fixed;inset:0;margin:auto;height:fit-content;width:min(420px,92vw);max-width:92vw;max-height:92vh;overflow-y:auto;overflow-x:hidden;scrollbar-width:thin;
+    background:var(--nevoa);border-radius:24px;padding:42px 22px 26px;box-shadow:0 24px 48px -20px rgba(64,44,41,.6)}
+  dialog.rsvp-pop::backdrop{background:rgba(64,44,41,.55);backdrop-filter:blur(2px)}
+  dialog.rsvp-pop[open]{animation:popin .35s cubic-bezier(.2,.8,.2,1)}
+  @keyframes popin{from{opacity:0;transform:translateY(18px) scale(.97)}to{opacity:1;transform:none}}
+  @media (prefers-reduced-motion:reduce){dialog.rsvp-pop[open]{animation:none}}
+  dialog.rsvp-pop h2{font-size:42px}
+  .rsvp-msg{font-size:14px;line-height:1.45;color:var(--caramelo);text-align:center}
+  .rsvp-msg:empty{display:none}
+  .primary[disabled]{opacity:.6;cursor:progress}
+  .rsvp-done{margin-top:22px;text-align:center;display:grid;gap:14px}
+  .rsvp-done-title{font-family:var(--hand);font-weight:700;font-size:30px;color:var(--caramelo);transform:rotate(-2deg)}
+  .rsvp-done .lead{margin-top:0}
+  .pop-close{position:absolute;top:12px;right:12px;width:38px;height:38px;border-radius:50%;border:0;background:var(--cream);
+    display:grid;place-items:center;cursor:pointer;color:var(--cafe);z-index:2}
+  .pop-close svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round}
+  dialog figure{background:var(--white);padding:12px 12px 8px;transform:rotate(-1deg)}
+  dialog img{display:block;max-width:100%;max-height:72vh;object-fit:contain}
+  dialog figcaption{font-family:var(--hand);font-size:26px;color:var(--cafe);text-align:center;padding-top:6px}
+  .lb-nav{display:flex;justify-content:center;gap:12px;margin-top:14px}
+  .lb-nav button{font:inherit;font-size:15px;font-weight:500;padding:10px 18px;border-radius:999px;border:0;background:var(--white);color:var(--cafe);cursor:pointer}
+
+  footer{margin:56px 24px 0;padding:28px 0 36px;border-top:1px solid var(--line);text-align:center;color:var(--muted)}
+  footer .f-event{font-family:var(--display);font-size:24px;line-height:1.1;color:var(--cafe)}
+  footer .f-names{font-family:var(--script);font-size:30px;line-height:1.2;color:var(--caramelo);margin-top:4px}
+  footer .f-info{font-size:12.5px;line-height:1.6;margin-top:10px}
+</style>
+</head>
+<body>
+<main>
+
+  <!-- ===== desenhos em traço (utensílios de casa) ===== -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs>
+      <pattern id="holes" width="9" height="9" patternUnits="userSpaceOnUse"><path d="M2.5 3 q2 4 4 0" fill="none" stroke="#733F2D" stroke-width="1.1" stroke-linecap="round"/></pattern>
+      <pattern id="quilt" width="12" height="12" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><path d="M0 0V12M0 0H12" fill="none" stroke="#733F2D" stroke-width="1.1"/></pattern>
+      <clipPath id="grateFace"><path d="M27 42 L69 37 L77 124 L34 129 Z"/></clipPath>
+      <clipPath id="holderFace"><rect x="16" y="30" width="86" height="86" rx="12"/></clipPath>
+    </defs>
+    <symbol id="grater" viewBox="0 0 100 140">
+      <path class="doodle" d="M22 34 L72 28 L82 128 L30 134 Z"/>
+      <path class="doodle" d="M22 34 L13 41 L21 138 L30 134"/>
+      <path class="doodle" d="M34 32 L36 13 Q48 4 60 10 L62 30"/>
+      <path class="doodle" d="M41 31 L42 17 Q48 12 55 15 L56 30"/>
+      <rect x="20" y="30" width="70" height="104" fill="url(#holes)" clip-path="url(#grateFace)"/>
+    </symbol>
+    <symbol id="rack" viewBox="0 0 180 150">
+      <g class="doodle">
+        <rect x="8" y="8" width="164" height="9" rx="4.5"/><path d="M14 8 V2 M166 8 V2"/>
+        <circle cx="30" cy="22" r="4"/><path d="M30 26 V96"/><path d="M16 100 a14 14 0 0 0 28 0 Z"/>
+        <circle cx="60" cy="22" r="4"/><path d="M60 26 V92"/><ellipse cx="60" cy="110" rx="10" ry="16"/>
+        <circle cx="90" cy="22" r="4"/><path d="M90 26 V86"/><rect x="79" y="86" width="22" height="38" rx="3"/><path d="M85 93 V117 M90 93 V117 M95 93 V117"/>
+        <circle cx="120" cy="22" r="4"/><path d="M120 26 V92"/><circle cx="120" cy="108" r="15"/><path d="M114 103h.1M120 103h.1M126 103h.1M114 109h.1M120 109h.1M126 109h.1M117 115h.1M123 115h.1" stroke-width="2.6"/>
+        <circle cx="150" cy="22" r="4"/><path d="M150 26 V74"/><path d="M150 74 C136 96 138 128 150 132 C162 128 164 96 150 74 Z"/><path d="M150 74 C144 98 145 126 150 132 M150 74 C156 98 155 126 150 132"/>
+      </g>
+    </symbol>
+    <symbol id="holder" viewBox="0 0 120 130">
+      <rect x="16" y="30" width="86" height="86" rx="12" fill="url(#quilt)" clip-path="url(#holderFace)"/>
+      <rect class="doodle" x="16" y="30" width="86" height="86" rx="12"/>
+      <rect class="doodle" x="22" y="36" width="74" height="74" rx="9"/>
+      <path class="doodle" d="M26 32 C16 8 40 0 46 24"/>
+    </symbol>
+    <symbol id="mixer" viewBox="0 0 150 140">
+      <g class="doodle">
+        <path d="M44 116 V54 C44 38 54 30 68 30 H114 C128 30 136 40 136 52 C136 62 130 68 120 68 H70"/>
+        <path d="M66 52 H124"/><circle cx="56" cy="62" r="4"/>
+        <path d="M100 68 V82"/><path d="M68 84 H132 C132 104 120 116 100 116 C80 116 68 104 68 84 Z"/>
+        <rect x="28" y="116" width="112" height="12" rx="6"/>
+        <path d="M12 104 C20 96 22 88 18 78 M18 92 C24 92 28 88 30 84 M14 98 C8 96 6 92 6 88"/>
+      </g>
+    </symbol>
+    <symbol id="cuscuz" viewBox="0 0 120 140">
+      <g class="doodle">
+        <!-- pegador e tampa em cúpula -->
+        <path d="M53 22 V13 Q53 9 57 9 H63 Q67 9 67 13 V22"/>
+        <path d="M24 36 Q26 22 60 21 Q94 22 96 36"/>
+        <path d="M21 36 H99"/>
+        <!-- panela de cima, afinando um pouco para baixo -->
+        <path d="M25 40 H95 L90 84 H30 Z"/>
+        <path d="M25 40 Q23 38 21 36 M95 40 Q97 38 99 36"/>
+        <!-- alças laterais -->
+        <path d="M26 50 H17 Q12 50 12 55 Q12 60 17 60 H27"/>
+        <path d="M94 50 H103 Q108 50 108 55 Q108 60 103 60 H93"/>
+        <!-- cintura e base, levemente mais larga embaixo -->
+        <path d="M28 84 H92"/>
+        <path d="M35 88 Q60 92 85 88"/>
+        <path d="M35 84 C34 100 31 116 31 127 Q31 132 36 132 H84 Q89 132 89 127 C89 116 86 100 85 84"/>
+        <path d="M33 120 Q60 124 87 120"/>
+      </g>
+    </symbol>
+    <symbol id="pot" viewBox="0 0 160 120">
+      <path fill="#FCF9F7" d="M24 46 H136 V96 C136 106 128 112 118 112 H42 C32 112 24 106 24 96 Z"/>
+      <g class="doodle">
+        <path d="M24 46 H136 V96 C136 106 128 112 118 112 H42 C32 112 24 106 24 96 Z"/>
+        <path d="M24 56 H10 C4 56 4 68 10 68 H24 M136 56 H150 C156 56 156 68 150 68 H136"/>
+        <path fill="#FCF9F7" d="M18 46 C22 26 138 26 142 46 Z"/><path d="M18 46 C22 26 138 26 142 46 Z"/>
+        <rect fill="#FCF9F7" x="68" y="16" width="24" height="11" rx="5"/><rect x="68" y="16" width="24" height="11" rx="5"/>
+      </g>
+    </symbol>
+    <symbol id="whisk" viewBox="0 0 64 64"><g class="doodle"><path d="M32 60V38"/><path d="M32 38c-10-6-12-30 0-34 12 4 10 28 0 34z"/><path d="M32 38c-4-8-4-26 0-34M32 38c4-8 4-26 0-34"/></g></symbol>
+    <symbol id="cup" viewBox="0 0 64 64"><g class="doodle"><path d="M12 22h32v14a16 16 0 0 1-32 0z"/><path d="M44 26h6a6 6 0 0 1 0 12h-6"/><path d="M22 8c-2 4 2 6 0 10M32 8c-2 4 2 6 0 10"/></g></symbol>
+  </svg>
+
+  <!-- ================= HERO ================= -->
+  <section class="hero" id="topo">
+    <svg class="rack" viewBox="0 0 360 150" aria-hidden="true">
+      <g class="doodle"><rect x="40" y="8" width="280" height="9" rx="4.5"/><path d="M48 8 V0 M312 8 V0"/></g>
+      <g class="tool" style="transform-origin:70px 22px;--sd:0s"><rect x="54" y="18" width="32" height="128" fill="transparent" stroke="none"/><g class="doodle"><circle cx="70" cy="22" r="4"/><path d="M70 26 V100"/><path d="M55 104 a15 15 0 0 0 30 0 Z"/></g></g><g class="tool" style="transform-origin:125px 22px;--sd:-1.2s"><rect x="109" y="18" width="32" height="128" fill="transparent" stroke="none"/><g class="doodle"><circle cx="125" cy="22" r="4"/><path d="M125 26 V94"/><ellipse cx="125" cy="113" rx="11" ry="17"/></g></g><g class="tool" style="transform-origin:180px 22px;--sd:-2.1s"><rect x="164" y="18" width="32" height="128" fill="transparent" stroke="none"/><g class="doodle"><circle cx="180" cy="22" r="4"/><path d="M180 26 V88"/><rect x="168" y="88" width="24" height="40" rx="3"/><path d="M174 95 V121 M180 95 V121 M186 95 V121"/></g></g><g class="tool" style="transform-origin:235px 22px;--sd:-0.6s"><rect x="219" y="18" width="32" height="128" fill="transparent" stroke="none"/><g class="doodle"><circle cx="235" cy="22" r="4"/><path d="M235 26 V95"/><circle cx="235" cy="112" r="16"/><path d="M229 106h.1M235 106h.1M241 106h.1M229 112h.1M235 112h.1M241 112h.1M232 118h.1M238 118h.1" stroke-width="2.6"/></g></g><g class="tool" style="transform-origin:290px 22px;--sd:-3s"><rect x="274" y="18" width="32" height="128" fill="transparent" stroke="none"/><g class="doodle"><circle cx="290" cy="22" r="4"/><path d="M290 26 V76"/><path d="M290 76 C276 98 278 132 290 136 C302 132 304 98 290 76 Z"/><path d="M290 76 C284 100 285 130 290 136 M290 76 C296 100 295 130 290 136"/></g></g>
+    </svg>
+    <div class="deco d-moka" data-speed="-.06" aria-hidden="true"><svg viewBox="0 0 120 140"><use href="#cuscuz"/></svg></div>
+    <div class="deco d-pot" data-speed="-.04" aria-hidden="true"><svg viewBox="0 0 160 120"><use href="#pot"/></svg></div>
+
+    <h1 class="event"><span class="e1">Chá de</span><span>Casa Nova</span></h1>
+
+    <div class="house" role="text" aria-label="Apê 810"><svg class="roof" viewBox="0 0 260 96" aria-hidden="true"><path d="M8 68 L130 8 L252 68"/><path d="M32 56 V94 M228 56 V94"/><path d="M178 31 V12 H194 V39"/><path class="smoke" d="M186 7 c-5 -3 3 -6 -1 -9"/></svg><b>APÊ 810</b></div>
+
+    <svg class="names" id="names" viewBox="0 0 360 80" role="img" aria-label="Alisson e Dayanne">
+      <text x="180" y="58" text-anchor="middle">Alisson e Dayanne</text>
+    </svg>
+
+    <a class="when" target="_blank" rel="noopener" href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=Ch%C3%A1%20de%20Casa%20Nova%20do%20Ap%C3%AA%20810&amp;dates=20261208T220000Z/20261209T020000Z&amp;details=Alisson%20e%20Dayanne%20convidam%20para%20o%20ch%C3%A1%20de%20casa%20nova.&amp;location=Sal%C3%A3o%20de%20Festas%2C%20Condom%C3%ADnio%20Mirante%20do%20Sol%2C%20Av.%20Jos%C3%A9%20Ribeiro%20Toledo%2C%201037%2C%20Cruz%20das%20Almas%2C%20Macei%C3%B3" aria-label="Terça, 8 de dezembro, às 19h. Salvar na agenda">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15.5" rx="2.5"/><path d="M3.5 10h17M8 3v4M16 3v4"/></svg>
+      Terça, 8 de dezembro, às 19h
+    </a>
+    <p class="when-hint">toque para salvar na agenda</p>
+    <p class="countdown"><span id="countdown">terça-feira!</span></p>
+
+    <div class="cta-row"><a class="scroll-cta" href="#convite">Abrir o convite
+      <svg viewBox="0 0 16 16"><path d="M8 3v10M3.5 8.5 8 13l4.5-4.5"/></svg></a></div>
+  </section>
+
+  <!-- ================= ENVELOPE ================= -->
+  <section class="arch" id="convite" aria-label="Convite">
+    <div class="card" id="card">
+      <div class="names2">Alisson e Dayanne</div>
+      <p>Algumas conquistas pedem casa cheia. Estamos compartilhando os detalhes da reforma, da mobília e as expectativas para o nosso futuro lar. Mas alguns passos se tornam mais especiais quando celebrados ao lado de quem torce por nós.</p><p>Por isso, queremos convidar você para conhecer o Apê 810. Venha abençoar e deixar a sua marca na nossa história.</p>
+      
+      <div class="date">
+        <span class="side">Terça</span>
+        <span class="day">08</span>
+        <span class="side">às 19h</span>
+      </div>
+      <div class="month">Dezembro</div>
+      <p class="notice"><span class="fit">Serviremos um jantar recheado de sabores e alegria.</span><small>Evento sem bebida alcoólica</small></p>
+    </div>
+    <div class="envelope" aria-hidden="true">
+      <svg viewBox="0 0 400 210" preserveAspectRatio="none">
+        <path d="M0 0 L200 118 L400 0 V210 H0z" fill="#FAF6F2"/>
+        <path d="M0 0 L200 118 L400 0" fill="none" stroke="#E7DBD2" stroke-width="1.5"/>
+        <path d="M0 210 L170 100 M400 210 L230 100" stroke="#EEE4DC" stroke-width="1.2"/>
+      </svg>
+      <div class="seal"><span><small>Apê</small>810</span></div>
+      <div class="sign">A &amp; D</div>
+    </div>
+  </section>
+
+  <!-- ================= LOCALIZAÇÃO ================= -->
+  <section class="loc" id="local">
+    <svg class="pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.2 7-12a7 7 0 0 0-14 0c0 5.8 7 12 7 12z"/><circle cx="12" cy="10" r="2.6"/></svg>
+    <h2>Localização</h2>
+    <p><b>Condomínio Mirante do Sol</b><br>Av. José Ribeiro Toledo, 1037<br>Cruz das Almas, Maceió (AL)</p>
+    <p class="venue">O evento será no Salão de Festas</p>
+    <a class="btn-light" target="_blank" rel="noopener" href="https://maps.app.goo.gl/qQZNyK8ymZh7teRr5">Abrir no Google Maps</a>
+  </section>
+
+  <section class="access">
+    <div class="panel">
+      <h3>Acesse as informações abaixo</h3>
+      <div class="tiles">
+        <a class="tile" href="#confirmar" id="open-rsvp" aria-controls="confirmar" aria-haspopup="dialog"><i><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></i>Confirmar presença</a>
+        <a class="tile" href="lista-de-presentes.html"><i><svg viewBox="0 0 24 24"><rect x="3.5" y="9" width="17" height="11" rx="1.5"/><path d="M2.5 9h19M12 9v11M12 9c-2-4-7-4-6-1s6 1 6 1zm0 0c2-4 7-4 6-1s-6 1-6 1z"/></svg></i>Lista de presentes</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= CONFIRMAR ================= -->
+  <dialog class="sec rsvp-pop" id="confirmar" aria-labelledby="rsvp-title">
+    <button type="button" class="pop-close" id="rsvp-close" aria-label="Fechar">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+    <svg class="bg-doodle" viewBox="0 0 64 64" style="width:96px;right:-18px;top:54px;transform:rotate(20deg)" aria-hidden="true"><use href="#whisk"/></svg>
+    <h2 id="rsvp-title">Você vem?</h2>
+    <span class="accent">contamos com você!</span>
+    <p class="lead">Confirme até <b>terça, 1º de dezembro</b>, para a gente preparar tudo do jeito certo.</p>
+    <form id="rsvp-form" novalidate>
+      <label for="rsvp-nome">Seu nome<input id="rsvp-nome" placeholder="Nome e sobrenome" autocomplete="name" maxlength="80"></label>
+      <div class="choice" role="group" aria-label="Você vai?">
+        <button type="button" aria-pressed="true">Vou, sim</button>
+        <button type="button" aria-pressed="false">Não vou poder</button>
+      </div>
+      <label id="qtd-pessoas" for="rsvp-qtd">Quantas pessoas, contando você<input id="rsvp-qtd" type="number" inputmode="numeric" min="1" max="10" value="1"></label>
+      <p class="rsvp-msg" id="rsvp-msg" role="status"></p>
+      <button type="submit" class="primary" id="rsvp-submit">Confirmar presença</button>
+    </form>
+    <div class="rsvp-done" id="rsvp-done" hidden>
+      <p class="rsvp-done-title" id="rsvp-done-title">Presença confirmada!</p>
+      <p class="lead" id="rsvp-done-text"></p>
+      <button type="button" class="primary" id="rsvp-done-close">Fechar</button>
+    </div>
+  </dialog>
+
+  <!-- ================= ESTILO DA CASA ================= -->
+  <section class="sec" id="estilo">
+    <h2>Estilo da casa</h2>
+    <span class="accent">cores e materiais do 810</span>
+    <p class="lead">Quer acertar no presente?<br>Estes são os materiais e algumas referências que inspiram a decoração do nosso apê.</p>
+    <div class="swatches" role="list" aria-label="Cores e materiais da casa">
+      <div class="sw" role="listitem"><i class="m-branco"></i>Branco</div>
+      <div class="sw" role="listitem"><i class="m-vidro"></i>Vidro</div>
+      <div class="sw" role="listitem"><i class="m-inox"></i>Inox</div>
+      <div class="sw" role="listitem"><i class="m-freijo"></i>Madeira</div>
+      <div class="sw" role="listitem"><i class="m-marrom"></i>Terrosos</div>
+    </div>
+
+    <div class="rail-wrap">
+    <button class="rail-arrow prev" type="button" id="rail-prev" aria-label="Fotos anteriores" hidden><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></button>
+    <button class="rail-arrow next nudge" type="button" id="rail-next" aria-label="Ver mais fotos"><svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg></button>
+    <div class="rail" id="rail">
+      <button class="pol" type="button"><img loading="lazy" src="img/estilo/cozinha-bancada.jpg" alt="Bancada de cozinha com utensílios de madeira, vasos e velas"><span>utensílios de cozinha</span></button>
+      <button class="pol" type="button"><img loading="lazy" src="img/estilo/sala-almofadas.jpg" alt="Sala com sofá claro, almofadas terracota e mesa de centro de madeira"><span>sala aconchegante</span></button>
+      <button class="pol" type="button"><img loading="lazy" src="img/estilo/mesa-posta.jpg" alt="Mesa de jantar de madeira posta com sousplat de fibra e taças"><span>mesa posta</span></button>
+      <button class="pol" type="button"><img loading="lazy" src="img/estilo/quarto-bege.jpg" alt="Quarto com roupa de cama bege e manta caramelo"><span>quarto em tons claros</span></button>
+      <button class="pol" type="button"><img loading="lazy" src="img/estilo/banheiro-bandeja.jpg" alt="Bandeja de madeira no banheiro com vela, potes de vidro e saboneteira"><span>bandeja do banheiro</span></button>
+      <button class="pol" type="button"><img loading="lazy" src="img/estilo/cantinho-cafe.jpg" alt="Cantinho do café com cafeteira, potes e luz amarela"><span>cantinho do café</span></button>
+      <button class="pol" type="button"><img loading="lazy" src="img/estilo/cozinha-prateleiras.jpg" alt="Cozinha branca com prateleiras de madeira e potes"><span>decoração em madeira na bancada</span></button>
+      <button class="pol" type="button"><img loading="lazy" src="img/estilo/cafe-da-manha.jpg" alt="Mesa de café da manhã com jarra de vidro, bule e louças claras"><span>utensílios de vidro e bambu</span></button>
+      <button class="pol" type="button"><img loading="lazy" src="img/estilo/sala-quadros.jpg" alt="Sala com parede de quadros, manta e tapete"><span>detalhes em tons terrosos</span></button>
+      <button class="pol" type="button"><img loading="lazy" src="img/estilo/banheiro-bancada.jpg" alt="Bancada de banheiro com saboneteira, vela e difusor"><span>bancada do banheiro</span></button>
+      <button class="pol" type="button"><img loading="lazy" src="img/estilo/quarto-aconchego.jpg" alt="Quarto com cabeceira ripada, almofadas caramelo e manta"><span>almofadas e mantas</span></button>
+      <button class="pol" type="button"><img loading="lazy" src="img/estilo/lavabo-prateleira.jpg" alt="Prateleira do lavabo com potes de vidro, velas e cesto de toalhas"><span>decoração no lavabo</span></button>
+    </div>
+    </div>
+    <p class="swipe" aria-hidden="true">toque na foto para ampliar</p>
+
+    <a class="primary" style="margin-top:18px" href="lista-de-presentes.html">Ver lista de presentes</a>
+    <div class="pix">
+      <b>Não vai poder estar com a gente?</b>
+      <p>Seu presente pode chegar até nós pelo condomínio ou, se preferir, em forma de Pix:</p>
+      <div class="pix-key">
+        <span id="pix-key">diariodoape810@gmail.com</span>
+        <button type="button" class="copy-btn" data-copy="pix-key" data-label="Copiar chave">Copiar chave</button>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p class="f-event">Chá de Casa Nova do Apê 810</p>
+    <p class="f-names">Alisson e Dayanne</p>
+    <p class="f-info">Terça, 8 de dezembro, às 19h<br>Salão de Festas do Condomínio Mirante do Sol</p>
+  </footer>
+
+  <dialog id="lightbox" aria-label="Foto ampliada">
+    <figure><img id="lb-img" alt=""><figcaption id="lb-cap"></figcaption></figure>
+    <div class="lb-nav">
+      <button type="button" id="lb-prev">Anterior</button>
+      <button type="button" id="lb-close">Fechar</button>
+      <button type="button" id="lb-next">Próxima</button>
+    </div>
+  </dialog>
+</main>
+<script>
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // abre sempre no topo. Na prévia, o visualizador reaproveita a rolagem da lista de presentes
+  // ao voltar; até a pessoa mexer na tela, qualquer rolagem herdada volta ao topo.
+  (function(){
+    if (location.hash) return;
+    try { history.scrollRestoration = 'manual'; } catch(_) {}
+    let touched = false;
+    const mark = ()=>{ touched = true; };
+    ['wheel','touchstart','pointerdown','keydown'].forEach(ev=>addEventListener(ev, mark, {once:true, passive:true}));
+    const toTop = ()=>{ if (!touched && scrollY > 0) scrollTo({top:0, left:0, behavior:'instant'}); };
+    toTop();
+    addEventListener('load', toTop);
+    addEventListener('pageshow', toTop);
+    addEventListener('scroll', toTop, {passive:true});
+    setTimeout(()=>removeEventListener('scroll', toTop), 2500);
+  })();
+
+  // entrada: adesivos "colam" na tela
+  requestAnimationFrame(()=>document.body.classList.add('ready'));
+
+  // contagem regressiva, junto da dica da agenda
+  // conta dias do calendário no horário de Maceió (não horas até as 19h),
+  // e se atualiza sozinha na virada do dia, mesmo com a página aberta
+  (function(){
+    const EVENT_DAY = Date.UTC(2026, 11, 8); // 8 de dezembro de 2026
+    const el = document.getElementById('countdown');
+    function todayInMaceio(){
+      const p = Object.fromEntries(new Intl.DateTimeFormat('en-CA',{timeZone:'America/Maceio',year:'numeric',month:'2-digit',day:'2-digit'})
+        .formatToParts(new Date()).map(x=>[x.type,x.value]));
+      return Date.UTC(+p.year, +p.month - 1, +p.day);
+    }
+    function render(){
+      const days = Math.round((EVENT_DAY - todayInMaceio()) / 86400000);
+      el.parentElement.hidden = days < 0;
+      if (days > 1) el.textContent = `faltam ${days} dias`;
+      else if (days === 1) el.textContent = 'é amanhã!';
+      else if (days === 0) el.textContent = 'é hoje!';
+    }
+    render();
+    setInterval(render, 60000);
+    document.addEventListener('visibilitychange', ()=>{ if (!document.hidden) render(); });
+  })();
+
+  // nomes escritos à mão: desenham ao abrir, flutuam depois e reescrevem ao toque
+  (function(){
+    const names = document.getElementById('names');
+    if (reduce) return;
+    function write(){
+      names.classList.remove('floating','drawing'); void names.getBoundingClientRect();
+      names.classList.add('drawing');
+      setTimeout(()=>names.classList.add('floating'), 3000);
+    }
+    (document.fonts ? document.fonts.ready : Promise.resolve()).then(write);
+    names.addEventListener('click', write);
+  })();
+
+  // utensílios pendurados seguem o balanço do celular (giroscópio) como pêndulos
+  (function(){
+    if (reduce) return;
+    const ns='http://www.w3.org/2000/svg';
+    const st=[...document.querySelectorAll('.tool')].map((t,i)=>{
+      const g=document.createElementNS(ns,'g');
+      g.style.transformBox='view-box'; g.style.transformOrigin=t.style.transformOrigin;
+      t.parentNode.insertBefore(g,t); g.appendChild(t);
+      return {g, a:0, v:0, k:.03+i*.005};
+    });
+    let target=0, running=false, lastShake=0;
+    function tick(){
+      let moving=false;
+      st.forEach(s=>{ s.v+=(target-s.a)*s.k; s.v*=.94; s.a+=s.v;
+        if (Math.abs(s.v)>.01 || Math.abs(target-s.a)>.05) moving=true;
+        s.g.style.transform=`rotate(${s.a.toFixed(2)}deg)`; });
+      if (moving) requestAnimationFrame(tick); else running=false;
+    }
+    const kick=()=>{ if(!running){ running=true; requestAnimationFrame(tick); } };
+    function orient(e){ if (e.gamma==null) return; target=Math.max(-28,Math.min(28,-e.gamma)); kick(); }
+    function motion(e){
+      const a=e.acceleration; if (!a || a.x==null) return;
+      if (Math.abs(a.x)+Math.abs(a.y||0)>14 && Date.now()-lastShake>600){
+        lastShake=Date.now(); st.forEach((s,i)=>s.v+=(i%2?1:-1)*(4+Math.random()*3)); kick();
+      }
+    }
+    function start(){ addEventListener('deviceorientation',orient); addEventListener('devicemotion',motion); }
+    const DO=window.DeviceOrientationEvent;
+    if (DO) start();
+    if (DO && typeof DO.requestPermission==='function'){
+      // iPhone: o sensor só é liberado depois de um toque na página
+      document.addEventListener('pointerdown',()=>{
+        DO.requestPermission().catch(()=>{});
+        if (window.DeviceMotionEvent && typeof DeviceMotionEvent.requestPermission==='function') DeviceMotionEvent.requestPermission().catch(()=>{});
+      },{once:true});
+    }
+  })();
+
+  // utensílios pendurados: balançam ao toque ou ao passar o dedo/mouse
+  document.querySelectorAll('.tool').forEach(t=>{
+    const swing=()=>{ if(reduce) return; t.classList.remove('swing'); void t.getBoundingClientRect(); t.classList.add('swing'); };
+    t.addEventListener('pointerenter', swing);
+    t.addEventListener('click', swing);
+    t.addEventListener('animationend', e=>{ if(e.animationName==='swing') t.classList.remove('swing'); });
+  });
+
+
+  // desenhos acompanham a rolagem
+  if (!reduce) {
+    const decos=[...document.querySelectorAll('.deco')];
+    let t=false;
+    addEventListener('scroll',()=>{ if(t) return; t=true; requestAnimationFrame(()=>{ const y=scrollY;
+      decos.forEach(d=>d.style.setProperty('--py', (y*parseFloat(d.dataset.speed))+'px')); t=false; }); },{passive:true});
+  }
+
+
+  // a frase do jantar cabe numa linha: reduz a fonte só o necessário
+  function fitLine(){
+    document.querySelectorAll('.notice .fit').forEach(el=>{
+      let size=13; el.style.fontSize=size+'px';
+      while (el.scrollWidth>el.clientWidth && size>9.5){ size-=.25; el.style.fontSize=size+'px'; }
+    });
+  }
+  (document.fonts ? document.fonts.ready : Promise.resolve()).then(fitLine);
+  addEventListener('resize', fitLine);
+  // copiar endereço e chave Pix
+  document.querySelectorAll('.copy-btn').forEach(btn=>btn.addEventListener('click',()=>{
+    const el=document.getElementById(btn.dataset.copy), label=btn.dataset.label;
+    const text=el.innerText.replace(/\n+/g,', ');
+    const flash=msg=>{ btn.textContent=msg; setTimeout(()=>btn.textContent=label,2000); };
+    const select=()=>{ const r=document.createRange(); r.selectNodeContents(el); const s=getSelection(); s.removeAllRanges(); s.addRange(r); flash('Selecionado'); };
+    try { navigator.clipboard.writeText(text).then(()=>flash('Copiado!'), select); } catch(_) { select(); }
+  }));
+
+  // cartão sai do envelope
+  const card=document.getElementById('card');
+  new IntersectionObserver((es,o)=>{es.forEach(e=>{if(e.isIntersecting){card.classList.add('open');o.disconnect()}})},{threshold:.15}).observe(card);
+
+  // "Você vem?" abre num pop-up ao tocar em Confirmar presença
+  const rsvp=document.getElementById('confirmar'), openRsvp=document.getElementById('open-rsvp');
+  function showRsvp(){ if (!rsvp.open) rsvp.showModal(); }
+  openRsvp.addEventListener('click',e=>{ e.preventDefault(); showRsvp(); });
+  document.getElementById('rsvp-close').addEventListener('click',()=>rsvp.close());
+  rsvp.addEventListener('click',e=>{ if (e.target===rsvp) rsvp.close(); }); // toque fora fecha
+  if (location.hash==='#confirmar') showRsvp();
+
+  // vou / não vou
+  document.querySelectorAll('.choice button').forEach(b=>b.addEventListener('click',()=>{
+    document.querySelectorAll('.choice button').forEach(x=>x.setAttribute('aria-pressed',x===b));
+    // quem não vai não precisa informar quantas pessoas
+    const vai = b.textContent.trim()==='Vou, sim';
+    document.getElementById('qtd-pessoas').hidden = !vai;
+    // o botão diz o que acontece: confirmar presença ou só avisar que não vai
+    document.getElementById('rsvp-submit').textContent = vai ? 'Confirmar presença' : 'Enviar resposta';
+  }));
+
+  // confirmação de presença: salva na aba "Presença" da planilha (mesmo Apps Script da lista de presentes)
+  (function(){
+    const API = 'https://script.google.com/macros/s/AKfycbwwa1ZaAlbfqu0nPgevQkBZlaJWGtz2xrSuUf8QZEICT4QowPiMbJXIdkCoepKjAA7g/exec';
+    const form = document.getElementById('rsvp-form'), msg = document.getElementById('rsvp-msg');
+    const nome = document.getElementById('rsvp-nome'), qtd = document.getElementById('rsvp-qtd');
+    const submit = document.getElementById('rsvp-submit'), done = document.getElementById('rsvp-done');
+    const vai = () => document.querySelector('.choice button[aria-pressed="true"]').textContent.trim() === 'Vou, sim';
+    form.addEventListener('submit', async e=>{
+      e.preventDefault();
+      msg.textContent = '';
+      if (!nome.value.trim()) { msg.textContent = 'Escreva seu nome para a gente saber quem confirmou.'; nome.focus(); return; }
+      const pessoas = Math.min(10, Math.max(1, parseInt(qtd.value, 10) || 1));
+      const label = submit.textContent;
+      submit.disabled = true; submit.textContent = 'Enviando…';
+      try {
+        const res = await fetch(API, {method:'POST', headers:{'Content-Type':'text/plain;charset=utf-8'},
+          body: JSON.stringify({acao:'presenca', nome:nome.value.trim(), vai:vai(), pessoas})});
+        const r = await res.json();
+        if (!r.ok) throw new Error(r.erro || 'erro');
+        const primeiro = nome.value.trim().split(/\s+/)[0];
+        document.getElementById('rsvp-done-title').textContent = vai() ? 'Presença confirmada!' : 'Resposta enviada';
+        document.getElementById('rsvp-done-text').textContent = vai()
+          ? `Obrigado, ${primeiro}! Esperamos ${pessoas === 1 ? 'você' : `vocês (${pessoas} pessoas)`} na terça, 8 de dezembro, às 19h.`
+          : `Obrigado por avisar, ${primeiro}. Vamos sentir sua falta!`;
+        form.hidden = true; done.hidden = false;
+      } catch(_) {
+        msg.textContent = 'Não deu para enviar agora. Verifique a internet e tente de novo.';
+      } finally {
+        submit.disabled = false; submit.textContent = label;
+      }
+    });
+    document.getElementById('rsvp-done-close').addEventListener('click', ()=>document.getElementById('confirmar').close());
+  })();
+
+  // estilo da casa: setas do carrossel
+  const rail=document.getElementById('rail'), rPrev=document.getElementById('rail-prev'), rNext=document.getElementById('rail-next');
+  const step=()=>rail.querySelector('.pol').getBoundingClientRect().width+18;
+  rNext.addEventListener('click',()=>{ rNext.classList.remove('nudge'); rail.scrollBy({left:step(),behavior:reduce?'auto':'smooth'}); });
+  rPrev.addEventListener('click',()=>rail.scrollBy({left:-step(),behavior:reduce?'auto':'smooth'}));
+  function railArrows(){ rPrev.hidden = rail.scrollLeft < 10; rNext.hidden = rail.scrollLeft + rail.clientWidth >= rail.scrollWidth - 10; }
+  rail.addEventListener('scroll',()=>{ rNext.classList.remove('nudge'); railArrows(); },{passive:true});
+  railArrows();
+
+  // estilo da casa: ampliação
+  const pols=[...document.querySelectorAll('.pol')];
+  const lb=document.getElementById('lightbox'), lbImg=document.getElementById('lb-img'), lbCap=document.getElementById('lb-cap');
+  let cur=0;
+  const visible=()=>pols.filter(p=>!p.hidden);
+  function show(i){ const v=visible(); cur=(i+v.length)%v.length; const p=v[cur], im=p.querySelector('img');
+    lbImg.src=im.src; lbImg.alt=im.alt; lbCap.textContent=p.querySelector('span').textContent; }
+  pols.forEach(p=>p.addEventListener('click',()=>{ show(visible().indexOf(p)); lb.showModal(); }));
+  document.getElementById('lb-prev').onclick=()=>show(cur-1);
+  document.getElementById('lb-next').onclick=()=>show(cur+1);
+  document.getElementById('lb-close').onclick=()=>lb.close();
+  lb.addEventListener('click',e=>{ if(e.target===lb) lb.close(); });
+  let sx=null; lb.addEventListener('touchstart',e=>sx=e.touches[0].clientX,{passive:true});
+  lb.addEventListener('touchend',e=>{ if(sx===null) return; const dx=e.changedTouches[0].clientX-sx; if(Math.abs(dx)>40) show(cur+(dx<0?1:-1)); sx=null; });
+</script>
+</body>
+</html>
