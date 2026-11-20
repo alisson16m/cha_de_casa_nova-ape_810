@@ -114,6 +114,15 @@
   .claim-pop .ok{border:0;background:var(--cafe);color:#fff}
   .claim-pop .ok[disabled]{opacity:.6;cursor:progress}
   .claim-pop .cancel{border:1px solid var(--line);background:var(--white);color:var(--cafe)}
+  .claim-pop .thanks{font-family:var(--hand);font-size:21px;line-height:1.1;color:var(--caramelo);margin-bottom:2px}
+  .claim-pop .when{margin-top:6px;font-size:14px;line-height:1.45;color:var(--muted)}
+  .claim-pop .seg button[aria-pressed=true]{background:var(--caramelo);border-color:var(--caramelo);color:#fff}
+  .claim-pop .lbl{display:block;margin-top:18px;font-size:13.5px;color:var(--muted)}
+  .claim-pop .stepper{display:flex;align-items:center;gap:16px;margin-top:8px}
+  .claim-pop .stepper button{width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:var(--white);color:var(--cafe);font:inherit;font-size:22px;line-height:1;cursor:pointer}
+  .claim-pop .stepper output{min-width:24px;text-align:center;font-size:20px;font-weight:600;color:var(--cafe)}
+  .claim-pop .later{display:block;margin:14px auto 0;background:none;border:0;font:inherit;font-size:14px;color:var(--muted);text-decoration:underline;cursor:pointer;padding:6px}
+  .claim-pop button:focus-visible{outline:2px solid var(--caramelo);outline-offset:2px}
 
   /* ===== rodapé com Pix ===== */
   .pix{margin:44px 20px 0;border-radius:18px;background:var(--cafe);color:var(--rosado);padding:26px 20px;text-align:center}
@@ -173,6 +182,36 @@
         <button type="submit" class="ok" id="claim-ok">Confirmar</button>
       </div>
     </form>
+    <!-- etapa 2: depois de reservar o presente, pergunta se a pessoa vai ao chá -->
+    <form id="rsvp-step" hidden>
+      <p class="thanks">Presente reservado, obrigado!</p>
+      <h2 id="rsvp-title">Você vai ao chá?</h2>
+      <p class="when">Terça, 08/12, às 19h, no salão do Mirante do Sol</p>
+      <div class="row seg">
+        <button type="button" class="cancel" id="rsvp-vou" aria-pressed="true">Vou</button>
+        <button type="button" class="cancel" id="rsvp-nao" aria-pressed="false">Não vou</button>
+      </div>
+      <label for="rsvp-nome2" id="rsvp-nome-wrap" hidden>Seu nome
+        <input id="rsvp-nome2" autocomplete="name" maxlength="80" placeholder="Nome e sobrenome">
+      </label>
+      <div id="rsvp-qtd-wrap">
+        <span class="lbl" id="rsvp-qtd-lbl">Quantas pessoas, contando você?</span>
+        <div class="stepper" role="group" aria-labelledby="rsvp-qtd-lbl">
+          <button type="button" id="rsvp-menos" aria-label="Menos uma pessoa">−</button>
+          <output id="rsvp-n" aria-live="polite">1</output>
+          <button type="button" id="rsvp-mais" aria-label="Mais uma pessoa">+</button>
+        </div>
+      </div>
+      <p class="msg" id="rsvp-msg" role="status"></p>
+      <div class="row"><button type="submit" class="ok" id="rsvp-ok">Confirmar presença</button></div>
+      <button type="button" class="later" id="rsvp-later">Responder depois</button>
+    </form>
+    <div id="rsvp-done" hidden>
+      <p class="thanks" id="rsvp-done-hand">Até dia 08!</p>
+      <h2 id="rsvp-done-title">Presença confirmada</h2>
+      <p class="when" id="rsvp-done-text"></p>
+      <div class="row"><button type="button" class="ok" id="rsvp-done-close">Fechar</button></div>
+    </div>
   </dialog>
 </main>
 
@@ -428,8 +467,59 @@
     const nameIn = document.getElementById('claim-name'), msg = document.getElementById('claim-msg');
     const ok = document.getElementById('claim-ok');
     let current = null;
+
+    // etapa 2: presença (mesma aba "Presença" que o convite usa)
+    const PRESENCA_KEY = 'ape810-presenca';   // o convite grava a mesma chave
+    const rsvpForm = document.getElementById('rsvp-step'), rsvpDone = document.getElementById('rsvp-done');
+    const rVou = document.getElementById('rsvp-vou'), rNao = document.getElementById('rsvp-nao');
+    const rN = document.getElementById('rsvp-n'), rOk = document.getElementById('rsvp-ok'), rMsg = document.getElementById('rsvp-msg');
+    const rNomeWrap = document.getElementById('rsvp-nome-wrap'), rNome = document.getElementById('rsvp-nome2');
+    let rVai = true, rPessoas = 1, rNomeAtual = '';
+    const jaRespondeu = () => { try { return !!localStorage.getItem(PRESENCA_KEY); } catch(_) { return false; } };
+    function setVai(v){
+      rVai = v; rVou.setAttribute('aria-pressed', v); rNao.setAttribute('aria-pressed', !v);
+      document.getElementById('rsvp-qtd-wrap').hidden = !v;
+      rOk.textContent = v ? 'Confirmar presença' : 'Enviar resposta';
+    }
+    function showRsvp(nome){
+      rNomeAtual = nome; rPessoas = 1; rN.textContent = '1'; rMsg.textContent = ''; rOk.disabled = false; setVai(true);
+      rNomeWrap.hidden = !!nome; rNome.value = '';
+      form.hidden = true; rsvpDone.hidden = true; rsvpForm.hidden = false;
+      (nome ? rVou : rNome).focus();
+    }
+    rVou.addEventListener('click', ()=>setVai(true));
+    rNao.addEventListener('click', ()=>setVai(false));
+    document.getElementById('rsvp-menos').addEventListener('click', ()=>{ rPessoas = Math.max(1, rPessoas-1); rN.textContent = rPessoas; });
+    document.getElementById('rsvp-mais').addEventListener('click', ()=>{ rPessoas = Math.min(10, rPessoas+1); rN.textContent = rPessoas; });
+    document.getElementById('rsvp-later').addEventListener('click', ()=>pop.close());
+    document.getElementById('rsvp-done-close').addEventListener('click', ()=>pop.close());
+    rsvpForm.addEventListener('submit', async e=>{
+      e.preventDefault();
+      const nome = rNomeAtual || rNome.value.trim();
+      if (!nome) { rMsg.textContent = 'Escreva seu nome para a gente saber quem respondeu.'; rNome.focus(); return; }
+      const label = rOk.textContent;
+      rOk.disabled = true; rOk.textContent = 'Enviando…'; rMsg.textContent = '';
+      try {
+        const r = await call({acao:'presenca', nome, vai:rVai, pessoas: rVai ? rPessoas : 1});
+        if (!r.ok) throw new Error(r.erro || 'erro');
+        try { localStorage.setItem(PRESENCA_KEY, '1'); } catch(_) {}
+        const primeiro = nome.split(/\s+/)[0];
+        document.getElementById('rsvp-done-hand').textContent = rVai ? 'Até dia 08!' : 'Obrigado por avisar';
+        document.getElementById('rsvp-done-title').textContent = rVai ? 'Presença confirmada' : 'Resposta enviada';
+        document.getElementById('rsvp-done-text').textContent = rVai
+          ? `Obrigado, ${primeiro}! Esperamos ${rPessoas === 1 ? 'você' : `vocês (${rPessoas} pessoas)`} na terça, 8 de dezembro, às 19h.`
+          : `Vamos sentir sua falta, ${primeiro}. Obrigado pelo presente!`;
+        rsvpForm.hidden = true; rsvpDone.hidden = false;
+        document.getElementById('rsvp-done-close').focus();
+      } catch(_) {
+        rMsg.textContent = 'Não deu para enviar agora. Verifique a internet e tente de novo.';
+        rOk.disabled = false; rOk.textContent = label;
+      }
+    });
+
     function openPop(li){
       current = li; msg.textContent = ''; ok.disabled = false; ok.textContent = 'Confirmar';
+      form.hidden = false; rsvpForm.hidden = true; rsvpDone.hidden = true;
       document.getElementById('claim-what').textContent = li.querySelector('.name').textContent.replace(/^./, c=>c.toUpperCase());
       try { nameIn.value = localStorage.getItem(KEY + '-nome') || ''; } catch(_) {}
       pop.showModal(); nameIn.focus();
@@ -446,7 +536,11 @@
       try {
         const r = await call({acao:'escolher', id:li.dataset.id, item:li.dataset.name, nome});
         if (r.escolhidos) taken = new Set(r.escolhidos);
-        if (r.ok) { mine[li.dataset.id] = r.codigo; paint(); pop.close(); return; }
+        if (r.ok) {
+          mine[li.dataset.id] = r.codigo; paint();
+          if (jaRespondeu()) pop.close(); else showRsvp(nome);
+          return;
+        }
         paint();
         msg.textContent = r.erro === 'ja_escolhido'
           ? 'Outro convidado escolheu este presente há pouco. Que tal escolher outro item da lista?'
